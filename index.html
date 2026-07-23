@@ -108,30 +108,31 @@
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 4px;
+      gap: 2px;
       position: relative;
-      padding: 28px 12px 14px;
+      padding: 28px 8px 14px;
       overflow: visible;
     }
     .ehpr-progress::before {
       content: "";
       position: absolute;
-      top: 44px; left: 10%; right: 10%;
+      top: 44px; left: 6%; right: 6%;
       height: 3px; background: #D5DCE6; z-index: 0;
     }
     .ehpr-progress::after {
       content: "";
       position: absolute;
-      top: 44px; left: 10%;
-      width: 45%;
+      top: 44px; left: 6%;
+      width: 52%;
       height: 3px; background: var(--ehpr-green); z-index: 0;
     }
     .ehpr-progress-step {
-      flex: 1 0 96px;
+      flex: 1 1 0;
       text-align: center;
       position: relative;
       z-index: 1;
       min-width: 0;
+      max-width: none;
     }
     .ehpr-progress-dot {
       width: 34px; height: 34px; border-radius: 50%;
@@ -176,11 +177,16 @@
       font-weight: 600;
       color: var(--ehpr-text);
       line-height: 1.35;
-      max-width: 120px;
+      max-width: 100%;
       margin-inline: auto;
+      padding-inline: 2px;
+      word-break: keep-all;
     }
     .ehpr-progress-step.is-done .ehpr-progress-label { color: var(--ehpr-text); }
-    .ehpr-progress-step.is-active .ehpr-progress-label { color: var(--ehpr-blue); font-weight: 700; }
+    .ehpr-progress-step.is-active .ehpr-progress-label {
+      color: #E53935;
+      font-weight: 700;
+    }
     .ehpr-progress-step:not(.is-done):not(.is-active) .ehpr-progress-label { color: var(--ehpr-muted); }
 
     .ehpr-congrats {
@@ -203,15 +209,20 @@
       font-size: clamp(1.55rem, 3vw, 2rem);
       font-weight: 800;
     }
-    .ehpr-congrats p { margin: 0 0 14px; font-size: 0.95rem; color: var(--ehpr-text); line-height: 1.6; }
+    .ehpr-congrats p { margin: 0 0 14px; font-size: 0.78rem; color: var(--ehpr-text); line-height: 1.55; font-weight: 600; }
+    .ehpr-congrats p strong {
+      font-weight: 800;
+      color: var(--ehpr-text);
+    }
     .ehpr-callout {
       background: #EAF3FB;
       border-radius: 12px;
       padding: 14px 16px;
-      font-size: 0.9rem;
+      font-size: 0.78rem;
       color: #1E4E8C;
       border: 0;
-      font-weight: 500;
+      font-weight: 600;
+      line-height: 1.5;
     }
 
     .ehpr-country-wrap { position: relative; }
@@ -273,7 +284,7 @@
     .ehpr-country-flag img { width: 100%; height: 100%; object-fit: cover; }
     .ehpr-country-name {
       display: block;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 800;
       color: var(--ehpr-navy);
       text-transform: uppercase;
@@ -366,7 +377,7 @@
       padding-top: 14px;
       border-top: 0;
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: #94A3B8;
       font-style: italic;
     }
@@ -395,11 +406,11 @@
     .ehpr-worry-icon.is-orange { background: var(--ehpr-orange); }
     .ehpr-worry-icon.is-green { background: var(--ehpr-green); }
     .ehpr-worry-icon.is-blue { background: var(--ehpr-blue); }
-    .ehpr-worry p { margin: 0; font-size: 0.74rem; font-weight: 600; line-height: 1.35; }
+    .ehpr-worry p { margin: 0; font-size: 0.78rem; font-weight: 600; line-height: 1.35; }
 
     .ehpr-benefits {
       display: grid;
-      grid-template-columns: repeat(7, 1fr);
+      grid-template-columns: repeat(8, 1fr);
       gap: 0;
       padding: 18px 8px;
       background: #fff;
@@ -431,13 +442,14 @@
     .ehpr-benefit-icon.is-blue { background: #E8F1FB; color: #1769B0; }
     .ehpr-benefit-icon.is-orange { background: #FFF3E0; color: #F39A2E; }
     .ehpr-benefit-icon.is-navy { background: #E8EEF8; color: #0B4A8B; }
+    .ehpr-benefit-icon.is-cyan { background: #E3F6FC; color: #1E88B8; }
     .ehpr-benefit-icon.is-red { background: #FDE8EE; color: #C6284A; }
     .ehpr-benefit-icon.is-purple { background: #F0E9FB; color: #7B4FC4; }
     .ehpr-benefit-icon.is-green { background: #E6F7EE; color: #1B9E5A; }
     .ehpr-benefit-icon.is-slate { background: #E8EEF4; color: #4A5D73; }
     .ehpr-benefit span {
       display: block;
-      font-size: 0.72rem;
+      font-size: 0.78rem;
       font-weight: 600;
       line-height: 1.35;
       color: #1E293B;
@@ -496,31 +508,49 @@
     .ehpr-countdown.is-expired .ehpr-countdown-grid { opacity: 0.55; }
 
     .ehpr-gallery {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 12px;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      margin: 8px 0 4px;
+      mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+    }
+    .ehpr-gallery-track {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      width: max-content;
+      max-width: none;
+      gap: 14px;
+      transform: translateX(0);
+      will-change: transform;
     }
     .ehpr-gallery-item {
+      flex: 0 0 240px;
+      width: 240px;
+      max-width: 240px;
       overflow: hidden;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      border-radius: var(--ehpr-radius);
+      background: #fff;
+      border: 1px solid var(--ehpr-border);
+      box-shadow: var(--ehpr-shadow);
     }
-    .ehpr-gallery-item:hover { transform: translateY(-3px); box-shadow: var(--ehpr-shadow); }
     .ehpr-gallery-item img {
       width: 100%;
-      height: auto;
+      height: 180px;
       aspect-ratio: 4 / 3;
       object-fit: cover;
       object-position: center;
       background: #dbeafe;
-    }
-    .ehpr-gallery-caption {
       display: block;
-      padding: 10px 8px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--ehpr-blue);
-      text-align: center;
-      line-height: 1.35;
+    }
+    @media (max-width: 768px) {
+      .ehpr-gallery-item {
+        flex-basis: 200px;
+        width: 200px;
+        max-width: 200px;
+      }
+      .ehpr-gallery-item img { height: 150px; }
     }
 
     .ehpr-trust {
@@ -547,7 +577,7 @@
       font-size: 1.05rem;
       margin-bottom: 4px;
     }
-    .ehpr-trust-item p { margin: 0; font-size: 0.8rem; color: var(--ehpr-muted); }
+    .ehpr-trust-item p { margin: 0; font-size: 0.78rem; color: var(--ehpr-muted); }
 
     .ehpr-footer {
       margin-top: 28px;
@@ -732,12 +762,40 @@
       .ehpr-worry { border-radius: 14px; }
       .ehpr-benefits { grid-template-columns: repeat(4, 1fr); gap: 8px; }
       .ehpr-benefit:not(:last-child)::after { display: none; }
-      .ehpr-gallery { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 768px) {
       :root { --ehpr-gutter: 14px; }
       .ehpr-hero-banner {
         object-position: center center;
+      }
+      .ehpr-progress {
+        gap: 0;
+        padding: 22px 0 10px;
+      }
+      .ehpr-progress::before,
+      .ehpr-progress::after {
+        top: 36px;
+        left: 4%;
+      }
+      .ehpr-progress::before { right: 4%; }
+      .ehpr-progress::after { width: 52%; }
+      .ehpr-progress-step { flex: 1 1 0; min-width: 0; }
+      .ehpr-progress-dot {
+        width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
+        border-width: 2px;
+      }
+      .ehpr-progress-spinner {
+        width: 40px;
+        height: 40px;
+        margin: -20px 0 0 -20px;
+        border-width: 2.5px;
+      }
+      .ehpr-progress-label {
+        font-size: 0.78rem;
+        line-height: 1.3;
+        padding-inline: 1px;
       }
       .ehpr-congrats { grid-template-columns: 1fr; text-align: center; }
       .ehpr-callout { text-align: left; }
@@ -745,7 +803,6 @@
       .ehpr-countdown-left { justify-content: center; text-align: left; }
       .ehpr-result-grid { grid-template-columns: repeat(2, 1fr); }
       .ehpr-benefits { grid-template-columns: repeat(3, 1fr); }
-      .ehpr-gallery { grid-template-columns: repeat(2, 1fr); }
       .ehpr-trust { grid-template-columns: 1fr; }
       .ehpr-cta { width: 100%; }
       .ehpr-country-nav { display: none; }
@@ -762,12 +819,22 @@
     }
     @media (max-width: 480px) {
       :root { --ehpr-gutter: 12px; }
+      .ehpr-progress-dot {
+        width: 26px;
+        height: 26px;
+        font-size: 0.7rem;
+      }
+      .ehpr-progress-spinner {
+        width: 36px;
+        height: 36px;
+        margin: -18px 0 0 -18px;
+      }
+      .ehpr-progress::before,
+      .ehpr-progress::after { top: 34px; }
       .ehpr-worries { grid-template-columns: 1fr; }
       .ehpr-result-grid { grid-template-columns: 1fr; }
       .ehpr-benefits { grid-template-columns: repeat(2, 1fr); }
       .ehpr-countdown-grid { grid-template-columns: repeat(2, 1fr); }
-      .ehpr-gallery { grid-template-columns: 1fr 1fr; }
-      .ehpr-gallery-item img { aspect-ratio: 1 / 1; }
     }
     @media (prefers-reduced-motion: reduce) {
       .ehpr-cta,
@@ -799,30 +866,30 @@
             <div class="ehpr-progress-dot" aria-hidden="true">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
             </div>
-            <div class="ehpr-progress-label">Hồ sơ được tiếp nhận</div>
+            <div class="ehpr-progress-label">Hồ sơ được<br>tiếp nhận</div>
           </div>
           <div class="ehpr-progress-step is-done" role="listitem">
             <div class="ehpr-progress-dot" aria-hidden="true">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
             </div>
-            <div class="ehpr-progress-label">Đã đánh giá sơ bộ</div>
+            <div class="ehpr-progress-label">Đã đánh giá<br>sơ bộ</div>
           </div>
           <div class="ehpr-progress-step is-done" role="listitem">
             <div class="ehpr-progress-dot" aria-hidden="true">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
             </div>
-            <div class="ehpr-progress-label">Đề xuất lộ trình phù hợp</div>
+            <div class="ehpr-progress-label">Đề xuất<br>lộ trình phù hợp</div>
           </div>
           <div class="ehpr-progress-step is-active" role="listitem" aria-current="step">
             <div class="ehpr-progress-dot">
               <span class="ehpr-progress-spinner" aria-hidden="true"></span>
               4
             </div>
-            <div class="ehpr-progress-label">Xác nhận quan tâm</div>
+            <div class="ehpr-progress-label">Xác nhận<br>quan tâm</div>
           </div>
           <div class="ehpr-progress-step" role="listitem">
             <div class="ehpr-progress-dot">5</div>
-            <div class="ehpr-progress-label">Tư vấn 1:1</div>
+            <div class="ehpr-progress-label">Tư vấn<br>1:1</div>
           </div>
         </div>
       </section>
@@ -838,7 +905,7 @@
         />
         <div>
           <h2><span data-ehpr-congrats-text>Chúc mừng!</span> <span aria-hidden="true">✨</span></h2>
-          <p>Dựa trên thông tin hồ sơ bạn đã cung cấp, hệ thống đã đề xuất phương án Du học &amp; Làm việc Quốc tế phù hợp để bạn tham khảo trong giai đoạn lựa chọn sau THPT.</p>
+          <p>Dựa trên thông tin hồ sơ bạn đã cung cấp, hệ thống đã <strong>đề xuất phương án Du học &amp; Làm việc Quốc tế phù hợp</strong> để bạn tham khảo trong giai đoạn lựa chọn sau THPT.</p>
           <div class="ehpr-callout">Đây là một lựa chọn bổ sung bên cạnh các phương án xét tuyển khác của bạn.</div>
         </div>
       </section>
@@ -949,10 +1016,10 @@
             <circle cx="48" cy="52" r="3" fill="#ED315B"/>
           </svg>
           <div>
-            <h3>Thời gian phản hồi</h3>
+            <h3>Hạn chót đăng ký</h3>
             <p class="ehpr-countdown-lead">Bạn vui lòng phản hồi trước</p>
             <p class="ehpr-countdown-date">15/08/2026</p>
-            <p class="ehpr-countdown-note">để được ưu tiên tư vấn và cập nhật lộ trình phù hợp.</p>
+            <p class="ehpr-countdown-note">để được nhận học bổng và tư vấn lộ trình phù hợp.</p>
           </div>
         </div>
         <div class="ehpr-countdown-right">
@@ -1004,10 +1071,6 @@
           <a href="https://zalo.me/example" target="_blank" rel="noopener noreferrer" data-ehpr-contact="zalo">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.1 2 11.2c0 2.9 1.4 5.5 3.7 7.2V22l3.4-1.9c.9.2 1.9.4 2.9.4 5.5 0 10-4.1 10-9.3S17.5 2 12 2zm1 12.5l-2.6-2.8-5 2.8L13.2 8l2.7 2.8L21 8l-8 6.5z"/></svg>
             Zalo EHoldings
-          </a>
-          <a href="https://www.eholdings.vn" target="_blank" rel="noopener noreferrer" data-ehpr-contact="website">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15 15 0 00-1.3-5 8 8 0 014.5 5zM12 4c.9 1.3 1.7 3.4 2.1 7H9.9c.4-3.6 1.2-5.7 2.1-7zM4.1 13h3.2a15 15 0 001.3 5 8 8 0 01-4.5-5zM8.6 11H4.1a8 8 0 014.5-5 15 15 0 00-1.3 5zm2.3 2h2.2c-.4 3.6-1.2 5.7-2.1 7-.9-1.3-1.7-3.4-2.1-7h2zm4.5 5a15 15 0 001.3-5h3.2a8 8 0 01-4.5 5z"/></svg>
-            www.eholdings.vn
           </a>
         </div>
       </div>
@@ -1129,20 +1192,22 @@
       var benefitData = [
         { title: 'Học bổng học phí', icon: 'cap', tone: 'blue' },
         { title: 'Học bổng GPA', icon: 'star', tone: 'orange' },
-        { title: 'Học bổng trường đối tác', icon: 'building', tone: 'navy' },
+        { title: 'Học bổng trường<br>đối tác', icon: 'building', tone: 'navy' },
+        { title: 'Miễn phí<br>khóa học tiếng', icon: 'book', tone: 'cyan' },
         { title: 'Voucher phí dịch vụ', icon: 'percent', tone: 'red' },
         { title: 'Miễn phí Ký túc xá', icon: 'home', tone: 'purple' },
         { title: 'Tặng vé máy bay', icon: 'plane', tone: 'green' },
         { title: 'Hỗ trợ việc làm', icon: 'briefcase', tone: 'slate' }
       ];
 
-      var galleryData = [
-        { title: 'Tiễn bay học viên', imageUrl: 'gallery/tien-bay.jpg' },
-        { title: 'Visa Du học', imageUrl: 'gallery/visa.jpg' },
-        { title: 'Trường đối tác', imageUrl: 'gallery/truong.jpg' },
-        { title: 'Làm thêm hợp pháp', imageUrl: 'gallery/lam-them.jpg' },
-        { title: 'Tốt nghiệp & việc làm', imageUrl: 'gallery/tot-nghiep.jpg' }
-      ];
+      var galleryData = [];
+      for (var gi = 1; gi <= 28; gi++) {
+        var n = gi < 10 ? ('0' + gi) : String(gi);
+        galleryData.push({
+          title: 'Hành trình học viên EHoldings',
+          imageUrl: 'gallery/journey/journey-' + n + '.jpg'
+        });
+      }
 
       var fallbackImg = 'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Crect fill=%27%23DBEAFE%27 width=%27400%27 height=%27300%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 fill=%27%230B4A8B%27 font-family=%27sans-serif%27 font-size=%2716%27%3EEholdings%3C/text%3E%3C/svg%3E';
 
@@ -1164,6 +1229,7 @@
           cap: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.2L1.5 8.4l10.5 5.2 8.7-4.3v5.5h1.8V8.4L12 3.2z"/><path d="M5.2 12.2v4.1c0 .4.2.8.5 1.1C7.2 18.6 9.5 19.2 12 19.2s4.8-.6 6.3-1.8c.3-.3.5-.7.5-1.1v-4.1l-6.8 3.4-6.8-3.4z"/></svg>',
           star: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.4l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.8l-6 3.7 1.6-6.7L2.4 9.3l6.9-.6L12 2.4z"/></svg>',
           building: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.8L3.5 7v1.8h17V7L12 2.8zM4.8 10.2v9.3h2.4v-3.6h9.6v3.6h2.4v-9.3H4.8zm5.4 1.8h3.6v2.7h-3.6v-2.7zM3.2 20.8h17.6V22H3.2z"/></svg>',
+          book: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 3.5h7.2c1.3 0 2.4.5 3.2 1.3.8-.8 1.9-1.3 3.2-1.3H22v15.2h-4.4c-1 0-1.8.4-2.4 1.1l-.6.7-.6-.7c-.6-.7-1.4-1.1-2.4-1.1H4V3.5zm1.8 1.8v11.2h5c.9 0 1.7.3 2.3.9V6.7c-.6-.8-1.5-1.4-2.5-1.4H5.8zm8.6 1.4v10.7c.6-.6 1.4-.9 2.3-.9h3.5V5.3h-3.3c-1 0-1.9.6-2.5 1.4z"/></svg>',
           percent: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.6 6.2a2.4 2.4 0 100 4.8 2.4 2.4 0 000-4.8zm8.8 6.8a2.4 2.4 0 100 4.8 2.4 2.4 0 000-4.8zM17.9 5.3l1.4 1.4-12.6 12.6-1.4-1.4L17.9 5.3z"/></svg>',
           home: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L2.8 10.4V21h7.2v-5.4h4V21h7.2V10.4L12 3zm0 3.8a1.7 1.7 0 110 3.4 1.7 1.7 0 010-3.4zm0 4.6c-1.8 0-4.2.8-4.2 2.2V15h8.4v-1.4c0-1.4-2.4-2.2-4.2-2.2z"/></svg>',
           plane: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>',
@@ -1208,9 +1274,47 @@
           return '<article class="ehpr-benefit"><div class="ehpr-benefit-icon is-' + item.tone + '" aria-hidden="true">' + iconSvg(item.icon) + '</div><span>' + item.title + '</span></article>';
         }).join('');
 
-        galleryEl.innerHTML = galleryData.map(function (item) {
-          return '<article class="ehpr-card ehpr-gallery-item"><img src="' + item.imageUrl + '" alt="' + item.title + '" width="220" height="165" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'' + fallbackImg + '\'"/><span class="ehpr-gallery-caption">' + item.title + '</span></article>';
+        var galleryItemsHtml = galleryData.map(function (item, idx) {
+          var loading = idx < 8 ? 'eager' : 'lazy';
+          return '<article class="ehpr-gallery-item"><img src="' + item.imageUrl + '" alt="' + item.title + '" width="240" height="180" loading="' + loading + '" decoding="async" onerror="this.onerror=null;this.src=\'' + fallbackImg + '\'"/></article>';
         }).join('');
+        galleryEl.innerHTML = '<div class="ehpr-gallery-track" data-ehpr-gallery-track>' + galleryItemsHtml + galleryItemsHtml + '</div>';
+
+        (function initGalleryMarquee() {
+          var track = galleryEl.querySelector('[data-ehpr-gallery-track]');
+          if (!track) return;
+          var pos = 0;
+          var speed = 0.6;
+          var paused = false;
+          var halfWidth = 0;
+
+          function measure() {
+            halfWidth = track.scrollWidth / 2;
+          }
+          measure();
+          window.addEventListener('resize', measure);
+          track.querySelectorAll('img').forEach(function (img) {
+            if (img.complete) return;
+            img.addEventListener('load', measure);
+          });
+          // Remeasure after layout settles
+          window.setTimeout(measure, 300);
+          window.setTimeout(measure, 1200);
+          galleryEl.addEventListener('mouseenter', function () { paused = true; });
+          galleryEl.addEventListener('mouseleave', function () { paused = false; });
+          galleryEl.addEventListener('touchstart', function () { paused = true; }, { passive: true });
+          galleryEl.addEventListener('touchend', function () { paused = false; }, { passive: true });
+
+          function tick() {
+            if (!paused && halfWidth > 0) {
+              pos += speed;
+              if (pos >= halfWidth) pos -= halfWidth;
+              track.style.transform = 'translate3d(' + (-pos) + 'px,0,0)';
+            }
+            window.requestAnimationFrame(tick);
+          }
+          window.requestAnimationFrame(tick);
+        })();
 
         function resolveUserName() {
           var params = new URLSearchParams(window.location.search);
