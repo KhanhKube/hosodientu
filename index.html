@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hồ sơ điện tử của bạn | Phương án du học &amp; làm việc quốc tế 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ehpr-navy: #0B4A8B;
+      --ehpr-blue: #1769B0;
+      --ehpr-red: #ED315B;
+      --ehpr-green: #20A464;
+      --ehpr-orange: #F39A2E;
+      --ehpr-purple: #8358D5;
+      --ehpr-cyan: #35A9DD;
+      --ehpr-background: #F4F8FC;
+      --ehpr-card: #FFFFFF;
+      --ehpr-text: #1E293B;
+      --ehpr-muted: #64748B;
+      --ehpr-border: #DCE6F0;
+      --ehpr-shadow: 0 4px 18px rgba(11, 74, 139, 0.08);
+      --ehpr-radius: 14px;
+      --ehpr-max: 1280px;
+      --ehpr-gutter: 24px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Be Vietnam Pro", Inter, system-ui, -apple-system, sans-serif;
+      color: var(--ehpr-text);
+      background: var(--ehpr-background);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    button, input, select { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    .ehpr-root { overflow-x: hidden; background: var(--ehpr-background); }
+    /* Nội dung + CTA căn giữa; banner full-bleed sát mép */
+    .ehpr-frame {
+      width: min(100% - (var(--ehpr-gutter) * 2), var(--ehpr-max));
+      max-width: var(--ehpr-max);
+      margin-inline: auto;
+    }
+    .ehpr-shell {
+      width: 100%;
+      margin-inline: auto;
+    }
+
+    .ehpr-root img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .ehpr-hero {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: transparent;
+      line-height: 0;
+      border-radius: 0;
+    }
+    .ehpr-hero-banner {
+      display: block;
+      width: 100%;
+      max-width: none;
+      height: auto;
+      margin: 0;
+      aspect-ratio: 2172 / 724;
+      object-fit: cover;
+      object-position: center center;
+      border-radius: 0;
+      vertical-align: top;
+    }
+
+    .ehpr-page {
+      width: 100%;
+      margin: 0;
+      padding: 8px 0 0;
+    }
+
+    .ehpr-section { margin: 22px 0; }
+    .ehpr-card {
+      background: var(--ehpr-card);
+      border: 1px solid var(--ehpr-border);
+      border-radius: var(--ehpr-radius);
+      box-shadow: var(--ehpr-shadow);
+    }
+    .ehpr-title {
+      margin: 28px 0 14px;
+      color: var(--ehpr-navy);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      text-align: center;
+    }
+    .ehpr-title.is-left { text-align: left; }
+
+    .ehpr-progress {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 4px;
+      position: relative;
+      padding: 28px 12px 14px;
+      overflow: visible;
+    }
+    .ehpr-progress::before {
+      content: "";
+      position: absolute;
+      top: 44px; left: 10%; right: 10%;
+      height: 3px; background: #D5DCE6; z-index: 0;
+    }
+    .ehpr-progress::after {
+      content: "";
+      position: absolute;
+      top: 44px; left: 10%;
+      width: 45%;
+      height: 3px; background: var(--ehpr-green); z-index: 0;
+    }
+    .ehpr-progress-step {
+      flex: 1 0 96px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+    }
+    .ehpr-progress-dot {
+      width: 34px; height: 34px; border-radius: 50%;
+      margin: 0 auto 8px;
+      display: grid; place-items: center;
+      background: #C5CDD8; color: #fff;
+      font-weight: 700; font-size: 0.85rem;
+      border: 3px solid #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+      position: relative;
+    }
+    .ehpr-progress-step.is-done .ehpr-progress-dot { background: var(--ehpr-green); }
+    .ehpr-progress-step.is-active .ehpr-progress-dot {
+      background: var(--ehpr-blue);
+      box-shadow: none;
+      z-index: 2;
+    }
+    .ehpr-progress-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 48px;
+      height: 48px;
+      margin: -24px 0 0 -24px;
+      border-radius: 50%;
+      border: 3px solid rgba(23, 105, 176, 0.15);
+      border-top-color: #1769B0;
+      border-right-color: #1769B0;
+      box-sizing: border-box;
+      pointer-events: none;
+      animation-name: ehpr-progress-spin;
+      animation-duration: 2.2s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    @keyframes ehpr-progress-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .ehpr-progress-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--ehpr-text);
+      line-height: 1.35;
+      max-width: 120px;
+      margin-inline: auto;
+    }
+    .ehpr-progress-step.is-done .ehpr-progress-label { color: var(--ehpr-text); }
+    .ehpr-progress-step.is-active .ehpr-progress-label { color: var(--ehpr-blue); font-weight: 700; }
+    .ehpr-progress-step:not(.is-done):not(.is-active) .ehpr-progress-label { color: var(--ehpr-muted); }
+
+    .ehpr-congrats {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 28px;
+      align-items: center;
+      padding: 28px 32px;
+    }
+    .ehpr-congrats-art {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto;
+      object-fit: contain;
+      display: block;
+    }
+    .ehpr-congrats h2 {
+      margin: 0 0 10px;
+      color: #E53935;
+      font-size: clamp(1.55rem, 3vw, 2rem);
+      font-weight: 800;
+    }
+    .ehpr-congrats p { margin: 0 0 14px; font-size: 0.95rem; color: var(--ehpr-text); line-height: 1.6; }
+    .ehpr-callout {
+      background: #EAF3FB;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: 0.9rem;
+      color: #1E4E8C;
+      border: 0;
+      font-weight: 500;
+    }
+
+    .ehpr-country-wrap { position: relative; }
+    .ehpr-country-nav {
+      position: absolute; top: 42%; transform: translateY(-50%);
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 0;
+      background: transparent; color: #94A3B8;
+      display: grid; place-items: center;
+      box-shadow: none;
+      cursor: pointer;
+      z-index: 2;
+      transition: color 0.25s ease;
+    }
+    .ehpr-country-nav:hover { color: var(--ehpr-navy); background: transparent; }
+    .ehpr-country-nav:focus-visible { outline: 3px solid rgba(23,105,176,.35); outline-offset: 2px; }
+    .ehpr-country-nav.is-prev { left: -6px; }
+    .ehpr-country-nav.is-next { right: -6px; }
+    .ehpr-country-list {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      padding: 8px 36px 12px;
+      -webkit-overflow-scrolling: touch;
+      justify-content: space-evenly;
+      align-items: stretch;
+      width: 100%;
+    }
+    .ehpr-country-list::-webkit-scrollbar { display: none; }
+    .ehpr-country-item {
+      flex: 1 1 0;
+      min-width: 96px;
+      max-width: 140px;
+      scroll-snap-align: center;
+      background: transparent;
+      border: 2px solid transparent;
+      border-radius: 14px;
+      padding: 12px 8px 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+    .ehpr-country-item:hover { background: #F8FBFE; }
+    .ehpr-country-item:focus-visible { outline: 3px solid rgba(23,105,176,.35); outline-offset: 2px; }
+    .ehpr-country-item.is-active {
+      border-color: var(--ehpr-blue);
+      background: #F0F7FC;
+      box-shadow: 0 4px 14px rgba(23, 105, 176, 0.12);
+    }
+    .ehpr-country-flag {
+      width: 56px; height: 56px; margin: 0 auto 10px;
+      border-radius: 50%; overflow: hidden;
+      border: 2px solid #E8EEF5;
+      background: #F8FAFC;
+      box-shadow: 0 2px 6px rgba(0,0,0,.06);
+    }
+    .ehpr-country-flag img { width: 100%; height: 100%; object-fit: cover; }
+    .ehpr-country-name {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--ehpr-navy);
+      text-transform: uppercase;
+    }
+
+    .ehpr-result {
+      padding: 20px 14px 16px;
+    }
+    .ehpr-result-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      align-items: stretch;
+    }
+    .ehpr-result-col {
+      text-align: center;
+      padding: 10px 12px 14px;
+      border-right: 1px solid var(--ehpr-border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 0;
+    }
+    .ehpr-result-col:last-child { border-right: 0; }
+    .ehpr-result-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      margin: 0 auto 12px;
+      display: grid; place-items: center; color: #fff;
+      flex-shrink: 0;
+    }
+    .ehpr-result-icon svg { width: 24px; height: 24px; }
+    .ehpr-result-icon.is-pink { background: #F06292; }
+    .ehpr-result-icon.is-cyan { background: var(--ehpr-cyan); }
+    .ehpr-result-icon.is-orange { background: var(--ehpr-orange); }
+    .ehpr-result-icon.is-purple { background: var(--ehpr-purple); }
+    .ehpr-result-icon.is-blue { background: var(--ehpr-blue); }
+    .ehpr-result-label {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--ehpr-text);
+      text-transform: none;
+      flex-shrink: 0;
+    }
+    .ehpr-result-body {
+      width: 100%;
+      flex: 1;
+      min-height: 88px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .ehpr-result-main {
+      margin: 0;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--ehpr-text);
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    .ehpr-result-main.is-income { color: var(--ehpr-purple); font-size: 0.86rem; font-weight: 800; }
+    .ehpr-result-main.is-intake { color: var(--ehpr-text); font-size: 0.95rem; font-weight: 800; }
+    .ehpr-result-roadmap {
+      margin: 0;
+      font-size: 0.78rem;
+      color: var(--ehpr-text);
+      line-height: 1.55;
+      font-weight: 600;
+      word-break: break-word;
+    }
+    .ehpr-result-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      font-size: 0.78rem;
+      color: var(--ehpr-text);
+      line-height: 1.5;
+      font-weight: 600;
+    }
+    .ehpr-result-list li + li { margin-top: 6px; }
+    .ehpr-result-list.is-program {
+      color: #E53935;
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+    .ehpr-disclaimer {
+      margin: 16px 0 0;
+      padding-top: 14px;
+      border-top: 0;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #94A3B8;
+      font-style: italic;
+    }
+
+    .ehpr-worries {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .ehpr-worry {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 76px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .ehpr-worry:hover { transform: translateY(-2px); box-shadow: var(--ehpr-shadow); }
+    .ehpr-worry-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: grid; place-items: center; color: #fff; flex-shrink: 0;
+    }
+    .ehpr-worry-icon svg { width: 20px; height: 20px; }
+    .ehpr-worry-icon.is-red { background: #EF5350; }
+    .ehpr-worry-icon.is-orange { background: var(--ehpr-orange); }
+    .ehpr-worry-icon.is-green { background: var(--ehpr-green); }
+    .ehpr-worry-icon.is-blue { background: var(--ehpr-blue); }
+    .ehpr-worry p { margin: 0; font-size: 0.74rem; font-weight: 600; line-height: 1.35; }
+
+    .ehpr-benefits {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0;
+      padding: 18px 8px;
+      background: #fff;
+      border: 1px solid var(--ehpr-border);
+      border-radius: var(--ehpr-radius);
+      box-shadow: var(--ehpr-shadow);
+    }
+    .ehpr-benefit {
+      text-align: center;
+      padding: 10px 8px;
+      position: relative;
+    }
+    .ehpr-benefit:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 18%;
+      bottom: 18%;
+      right: 0;
+      width: 1px;
+      background: #E6EDF5;
+    }
+    .ehpr-benefit-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      margin: 0 auto 10px;
+      display: grid; place-items: center;
+      border: 0;
+    }
+    .ehpr-benefit-icon svg { width: 28px; height: 28px; display: block; }
+    .ehpr-benefit-icon.is-blue { background: #E8F1FB; color: #1769B0; }
+    .ehpr-benefit-icon.is-orange { background: #FFF3E0; color: #F39A2E; }
+    .ehpr-benefit-icon.is-navy { background: #E8EEF8; color: #0B4A8B; }
+    .ehpr-benefit-icon.is-red { background: #FDE8EE; color: #C6284A; }
+    .ehpr-benefit-icon.is-purple { background: #F0E9FB; color: #7B4FC4; }
+    .ehpr-benefit-icon.is-green { background: #E6F7EE; color: #1B9E5A; }
+    .ehpr-benefit-icon.is-slate { background: #E8EEF4; color: #4A5D73; }
+    .ehpr-benefit span {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: #1E293B;
+    }
+
+    .ehpr-countdown {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: center;
+      padding: 24px;
+      background: linear-gradient(135deg, #EAF3FB, #F4F8FC);
+    }
+    .ehpr-countdown-left { display: flex; align-items: center; gap: 16px; }
+    .ehpr-countdown-clock { width: 88px; height: 88px; flex-shrink: 0; color: var(--ehpr-navy); }
+    .ehpr-countdown-left h3,
+    .ehpr-countdown-right h3 {
+      margin: 0 0 4px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ehpr-muted);
+      text-transform: uppercase;
+    }
+    .ehpr-countdown-lead { margin: 0 0 4px; font-size: 0.85rem; color: var(--ehpr-text); }
+    .ehpr-countdown-date {
+      margin: 0 0 4px;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--ehpr-red);
+      line-height: 1.1;
+    }
+    .ehpr-countdown-note { margin: 0; font-size: 0.8rem; color: var(--ehpr-muted); }
+    .ehpr-countdown-right { text-align: center; }
+    .ehpr-countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .ehpr-countdown-cell {
+      background: var(--ehpr-navy);
+      color: #fff;
+      border-radius: 10px;
+      padding: 12px 6px;
+      box-shadow: var(--ehpr-shadow);
+    }
+    .ehpr-countdown-num { display: block; font-size: 1.35rem; font-weight: 800; line-height: 1; }
+    .ehpr-countdown-unit { display: block; font-size: 0.65rem; margin-top: 4px; opacity: 0.85; text-transform: uppercase; }
+    .ehpr-countdown-expired {
+      display: none;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ehpr-red);
+    }
+    .ehpr-countdown.is-expired .ehpr-countdown-expired { display: block; }
+    .ehpr-countdown.is-expired .ehpr-countdown-grid { opacity: 0.55; }
+
+    .ehpr-gallery {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    .ehpr-gallery-item {
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .ehpr-gallery-item:hover { transform: translateY(-3px); box-shadow: var(--ehpr-shadow); }
+    .ehpr-gallery-item img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      object-position: center;
+      background: #dbeafe;
+    }
+    .ehpr-gallery-caption {
+      display: block;
+      padding: 10px 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--ehpr-blue);
+      text-align: center;
+      line-height: 1.35;
+    }
+
+    .ehpr-trust {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .ehpr-trust-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 18px;
+    }
+    .ehpr-trust-icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: #E8F1FA; color: var(--ehpr-navy);
+      display: grid; place-items: center; flex-shrink: 0;
+    }
+    .ehpr-trust-icon svg { width: 24px; height: 24px; }
+    .ehpr-trust-item strong {
+      display: block;
+      color: var(--ehpr-navy);
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+    .ehpr-trust-item p { margin: 0; font-size: 0.8rem; color: var(--ehpr-muted); }
+
+    .ehpr-footer {
+      margin-top: 28px;
+      background: linear-gradient(135deg, #0B4A8B, #1769B0);
+      color: #fff;
+      padding: 28px 0 22px;
+    }
+    .ehpr-cta-wrap { text-align: center; }
+    .ehpr-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: min(100%, 420px);
+      min-height: 52px;
+      padding: 14px 28px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ED315B, #F06292);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+      box-shadow: 0 8px 24px rgba(237, 49, 91, 0.35);
+      cursor: pointer;
+      transition: transform 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
+    }
+    .ehpr-cta:hover { transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 12px 28px rgba(237, 49, 91, 0.4); }
+    .ehpr-cta:active { transform: translateY(0); }
+    .ehpr-cta:focus-visible { outline: 3px solid rgba(255,255,255,.7); outline-offset: 3px; }
+    .ehpr-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px 24px;
+      margin-top: 18px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .ehpr-contacts a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+      min-height: 44px;
+    }
+    .ehpr-contacts a:hover { opacity: 0.9; }
+    .ehpr-contacts a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 4px; }
+    .ehpr-contacts svg { width: 18px; height: 18px; fill: currentColor; }
+
+    .ehpr-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      place-items: center;
+      padding: 16px;
+    }
+    .ehpr-modal.is-open {
+      display: grid;
+    }
+    .ehpr-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+    }
+    .ehpr-modal-dialog {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 480px);
+      max-height: calc(100vh - 32px);
+      overflow: auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.25);
+      padding: 22px 20px 20px;
+      animation: ehprFadeIn 0.25s ease;
+    }
+    @keyframes ehprFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .ehpr-modal-close {
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 36px; height: 36px;
+      border: 0; border-radius: 8px;
+      background: #F1F5F9;
+      color: var(--ehpr-text);
+      cursor: pointer;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+    .ehpr-modal-close:hover { background: #E2E8F0; }
+    .ehpr-modal-close:focus-visible { outline: 3px solid rgba(23,105,176,.35); }
+    .ehpr-modal h2 {
+      margin: 0 40px 8px 0;
+      color: var(--ehpr-navy);
+      font-size: 1.2rem;
+    }
+    .ehpr-modal-lead {
+      margin: 0 0 16px;
+      color: var(--ehpr-muted);
+      font-size: 0.88rem;
+    }
+    .ehpr-field { margin-bottom: 12px; }
+    .ehpr-field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ehpr-text);
+    }
+    .ehpr-field input,
+    .ehpr-field select {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--ehpr-border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      background: #fff;
+      color: var(--ehpr-text);
+    }
+    .ehpr-field input:focus,
+    .ehpr-field select:focus {
+      outline: 3px solid rgba(23,105,176,.25);
+      border-color: var(--ehpr-blue);
+    }
+    .ehpr-field.is-invalid input,
+    .ehpr-field.is-invalid select { border-color: var(--ehpr-red); }
+    .ehpr-error {
+      display: none;
+      margin-top: 4px;
+      font-size: 0.75rem;
+      color: var(--ehpr-red);
+    }
+    .ehpr-field.is-invalid .ehpr-error { display: block; }
+    .ehpr-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--ehpr-text);
+      margin: 8px 0 14px;
+    }
+    .ehpr-check input { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; }
+    .ehpr-check a { color: var(--ehpr-blue); text-decoration: underline; }
+    .ehpr-submit {
+      width: 100%;
+      min-height: 48px;
+      border: 0;
+      border-radius: 12px;
+      background: linear-gradient(90deg, #ED315B, #F06292);
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+      transition: filter 0.25s ease, transform 0.25s ease;
+    }
+    .ehpr-submit:hover:not(:disabled) { filter: brightness(1.05); transform: translateY(-1px); }
+    .ehpr-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+    .ehpr-form-status {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      min-height: 1.2em;
+    }
+    .ehpr-form-status.is-success { color: var(--ehpr-green); }
+    .ehpr-form-status.is-error { color: var(--ehpr-red); }
+    .ehpr-hp {
+      position: absolute !important;
+      left: -10000px !important;
+      top: auto !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
+    }
+
+    @media (max-width: 1024px) {
+      :root { --ehpr-gutter: 18px; }
+      .ehpr-result-grid { grid-template-columns: repeat(3, 1fr); }
+      .ehpr-result-col { border-right: 0; border-bottom: 1px solid var(--ehpr-border); }
+      .ehpr-worries { grid-template-columns: repeat(2, 1fr); }
+      .ehpr-worry { border-radius: 14px; }
+      .ehpr-benefits { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+      .ehpr-benefit:not(:last-child)::after { display: none; }
+      .ehpr-gallery { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      :root { --ehpr-gutter: 14px; }
+      .ehpr-hero-banner {
+        object-position: center center;
+      }
+      .ehpr-congrats { grid-template-columns: 1fr; text-align: center; }
+      .ehpr-callout { text-align: left; }
+      .ehpr-countdown { grid-template-columns: 1fr; }
+      .ehpr-countdown-left { justify-content: center; text-align: left; }
+      .ehpr-result-grid { grid-template-columns: repeat(2, 1fr); }
+      .ehpr-benefits { grid-template-columns: repeat(3, 1fr); }
+      .ehpr-gallery { grid-template-columns: repeat(2, 1fr); }
+      .ehpr-trust { grid-template-columns: 1fr; }
+      .ehpr-cta { width: 100%; }
+      .ehpr-country-nav { display: none; }
+      .ehpr-country-list {
+        padding-left: 4px;
+        padding-right: 4px;
+        justify-content: flex-start;
+        gap: 8px;
+      }
+      .ehpr-country-item {
+        flex: 0 0 104px;
+        max-width: none;
+      }
+    }
+    @media (max-width: 480px) {
+      :root { --ehpr-gutter: 12px; }
+      .ehpr-worries { grid-template-columns: 1fr; }
+      .ehpr-result-grid { grid-template-columns: 1fr; }
+      .ehpr-benefits { grid-template-columns: repeat(2, 1fr); }
+      .ehpr-countdown-grid { grid-template-columns: repeat(2, 1fr); }
+      .ehpr-gallery { grid-template-columns: 1fr 1fr; }
+      .ehpr-gallery-item img { aspect-ratio: 1 / 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ehpr-cta,
+      .ehpr-modal-dialog {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ehpr-root" data-ehpr-root>
+    <section class="ehpr-hero" aria-label="Hồ sơ điện tử của bạn">
+      <img
+        class="ehpr-hero-banner"
+        src="banner-hero.jpg"
+        alt="EHoldings Education First — Hồ sơ điện tử của bạn — Phương án du học và làm việc quốc tế 2026"
+        width="1400"
+        height="467"
+        decoding="async"
+      />
+    </section>
+
+    <div class="ehpr-frame">
+    <main class="ehpr-page">
+      <section class="ehpr-section" aria-label="Tiến độ hồ sơ" style="margin-top:18px;">
+        <div class="ehpr-progress" role="list">
+          <div class="ehpr-progress-step is-done" role="listitem">
+            <div class="ehpr-progress-dot" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
+            </div>
+            <div class="ehpr-progress-label">Hồ sơ được tiếp nhận</div>
+          </div>
+          <div class="ehpr-progress-step is-done" role="listitem">
+            <div class="ehpr-progress-dot" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
+            </div>
+            <div class="ehpr-progress-label">Đã đánh giá sơ bộ</div>
+          </div>
+          <div class="ehpr-progress-step is-done" role="listitem">
+            <div class="ehpr-progress-dot" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>
+            </div>
+            <div class="ehpr-progress-label">Đề xuất lộ trình phù hợp</div>
+          </div>
+          <div class="ehpr-progress-step is-active" role="listitem" aria-current="step">
+            <div class="ehpr-progress-dot">
+              <span class="ehpr-progress-spinner" aria-hidden="true"></span>
+              4
+            </div>
+            <div class="ehpr-progress-label">Xác nhận quan tâm</div>
+          </div>
+          <div class="ehpr-progress-step" role="listitem">
+            <div class="ehpr-progress-dot">5</div>
+            <div class="ehpr-progress-label">Tư vấn 1:1</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ehpr-section ehpr-card ehpr-congrats">
+        <img
+          class="ehpr-congrats-art"
+          src="icon.png"
+          alt=""
+          width="150"
+          height="150"
+          decoding="async"
+        />
+        <div>
+          <h2><span data-ehpr-congrats-text>Chúc mừng!</span> <span aria-hidden="true">✨</span></h2>
+          <p>Dựa trên thông tin hồ sơ bạn đã cung cấp, hệ thống đã đề xuất phương án Du học &amp; Làm việc Quốc tế phù hợp để bạn tham khảo trong giai đoạn lựa chọn sau THPT.</p>
+          <div class="ehpr-callout">Đây là một lựa chọn bổ sung bên cạnh các phương án xét tuyển khác của bạn.</div>
+        </div>
+      </section>
+
+      <h2 class="ehpr-title">Lựa chọn học tập &amp; làm việc tại các quốc gia dưới đây:</h2>
+      <section class="ehpr-section ehpr-country-wrap" aria-label="Chọn quốc gia">
+        <button type="button" class="ehpr-country-nav is-prev" data-ehpr-country-prev aria-label="Quốc gia trước">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="ehpr-country-list" role="tablist" aria-label="Quốc gia đề xuất" data-ehpr-country-list></div>
+        <button type="button" class="ehpr-country-nav is-next" data-ehpr-country-next aria-label="Quốc gia tiếp theo">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </section>
+
+      <h2 class="ehpr-title">Kết quả đề xuất</h2>
+      <section class="ehpr-section ehpr-card ehpr-result" aria-live="polite">
+        <div class="ehpr-result-grid">
+          <div class="ehpr-result-col">
+            <div class="ehpr-result-icon is-pink" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
+            </div>
+            <p class="ehpr-result-label">Chương trình</p>
+            <div class="ehpr-result-body">
+              <ul class="ehpr-result-list is-program" data-ehpr-program></ul>
+            </div>
+          </div>
+          <div class="ehpr-result-col">
+            <div class="ehpr-result-icon is-cyan" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <p class="ehpr-result-label">Lộ trình</p>
+            <div class="ehpr-result-body">
+              <p class="ehpr-result-roadmap" data-ehpr-roadmap></p>
+            </div>
+          </div>
+          <div class="ehpr-result-col">
+            <div class="ehpr-result-icon is-orange" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+            </div>
+            <p class="ehpr-result-label">Học bổng</p>
+            <div class="ehpr-result-body">
+              <ul class="ehpr-result-list" data-ehpr-scholarship></ul>
+            </div>
+          </div>
+          <div class="ehpr-result-col">
+            <div class="ehpr-result-icon is-purple" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <p class="ehpr-result-label">Thu nhập</p>
+            <div class="ehpr-result-body">
+              <p class="ehpr-result-main is-income" data-ehpr-income></p>
+            </div>
+          </div>
+          <div class="ehpr-result-col">
+            <div class="ehpr-result-icon is-blue" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            </div>
+            <p class="ehpr-result-label">Kỳ nhập học</p>
+            <div class="ehpr-result-body">
+              <p class="ehpr-result-main is-intake" data-ehpr-intake></p>
+            </div>
+          </div>
+        </div>
+        <p class="ehpr-disclaimer">* Thông tin mang tính chất tham khảo. Kết quả chính thức sẽ được xác nhận sau khi hoàn tất hồ sơ.</p>
+      </section>
+
+      <h2 class="ehpr-title">Nếu bạn đang băn khoăn...</h2>
+      <section class="ehpr-section ehpr-worries">
+        <article class="ehpr-card ehpr-worry">
+          <div class="ehpr-worry-icon is-red" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 15s1.5-2 4-2 4 2 4 2M9 9h.01M15 9h.01"/></svg>
+          </div>
+          <p>Điểm thi chưa như mong muốn.</p>
+        </article>
+        <article class="ehpr-card ehpr-worry">
+          <div class="ehpr-worry-icon is-orange" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.5 6h7M6 8.5v7M18 8.5v7M8.5 18h7"/></svg>
+          </div>
+          <p>Không phụ thuộc kết quả xét tuyển Đại học.</p>
+        </article>
+        <article class="ehpr-card ehpr-worry">
+          <div class="ehpr-worry-icon is-green" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </div>
+          <p>Mong muốn học tập và làm việc tại nước ngoài.</p>
+        </article>
+        <article class="ehpr-card ehpr-worry">
+          <div class="ehpr-worry-icon is-blue" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M16 11h4M18 9v4"/></svg>
+          </div>
+          <p>Vừa học vừa làm, không phụ thuộc vào kinh tế gia đình.</p>
+        </article>
+      </section>
+
+      <h2 class="ehpr-title">Hồ sơ của bạn sẽ được ưu tiên</h2>
+      <section class="ehpr-section ehpr-benefits" data-ehpr-benefits></section>
+
+      <section class="ehpr-section ehpr-card ehpr-countdown" data-ehpr-countdown>
+        <div class="ehpr-countdown-left">
+          <svg class="ehpr-countdown-clock" viewBox="0 0 96 96" aria-hidden="true">
+            <circle cx="48" cy="52" r="32" fill="#0B4A8B"/>
+            <circle cx="48" cy="52" r="26" fill="#1769B0"/>
+            <circle cx="48" cy="52" r="22" fill="#EAF3FB"/>
+            <path d="M48 36v16l10 6" stroke="#0B4A8B" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <rect x="42" y="14" width="12" height="8" rx="2" fill="#0B4A8B"/>
+            <path d="M30 20l-6-6M66 20l6-6" stroke="#0B4A8B" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="48" cy="52" r="3" fill="#ED315B"/>
+          </svg>
+          <div>
+            <h3>Thời gian phản hồi</h3>
+            <p class="ehpr-countdown-lead">Bạn vui lòng phản hồi trước</p>
+            <p class="ehpr-countdown-date">15/08/2026</p>
+            <p class="ehpr-countdown-note">để được ưu tiên tư vấn và cập nhật lộ trình phù hợp.</p>
+          </div>
+        </div>
+        <div class="ehpr-countdown-right">
+          <h3>Thời gian còn lại</h3>
+          <div class="ehpr-countdown-grid">
+            <div class="ehpr-countdown-cell"><span class="ehpr-countdown-num" data-ehpr-days>00</span><span class="ehpr-countdown-unit">Ngày</span></div>
+            <div class="ehpr-countdown-cell"><span class="ehpr-countdown-num" data-ehpr-hours>00</span><span class="ehpr-countdown-unit">Giờ</span></div>
+            <div class="ehpr-countdown-cell"><span class="ehpr-countdown-num" data-ehpr-mins>00</span><span class="ehpr-countdown-unit">Phút</span></div>
+            <div class="ehpr-countdown-cell"><span class="ehpr-countdown-num" data-ehpr-secs>00</span><span class="ehpr-countdown-unit">Giây</span></div>
+          </div>
+          <p class="ehpr-countdown-expired">Đã hết thời gian phản hồi ưu tiên.</p>
+        </div>
+      </section>
+
+      <h2 class="ehpr-title">Hành trình thành công của học viên EHoldings</h2>
+      <section class="ehpr-section ehpr-gallery" data-ehpr-gallery></section>
+
+      <section class="ehpr-trust">
+        <article class="ehpr-card ehpr-trust-item">
+          <div class="ehpr-trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div>
+            <strong>Hơn 2000+ học viên</strong>
+            <p>đã lựa chọn chương trình Du học &amp; Làm việc Quốc tế cùng hệ thống trong nhiều năm qua.</p>
+          </div>
+        </article>
+        <article class="ehpr-card ehpr-trust-item">
+          <div class="ehpr-trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 11V7a5 5 0 0110 0v4M5 11h14v10H5z"/></svg>
+          </div>
+          <div>
+            <strong>100+ đối tác chiến lược trực tiếp</strong>
+            <p>tại nhiều quốc gia phát triển như Hàn Quốc, Nhật Bản, Úc, Canada, Đức, Đài Loan...</p>
+          </div>
+        </article>
+      </section>
+    </main>
+    </div>
+
+    <footer class="ehpr-footer">
+      <div class="ehpr-frame ehpr-cta-wrap">
+        <button type="button" class="ehpr-cta" data-ehpr-open-modal>XÁC NHẬN XEM LỘ TRÌNH</button>
+        <div class="ehpr-contacts">
+          <a href="tel:0966504334" data-ehpr-contact="hotline">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.5.6 3.8.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.6.6 3.8.1.4 0 .8-.3 1.1L6.6 10.8z"/></svg>
+            Hotline 0966504334
+          </a>
+          <a href="https://zalo.me/example" target="_blank" rel="noopener noreferrer" data-ehpr-contact="zalo">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.1 2 11.2c0 2.9 1.4 5.5 3.7 7.2V22l3.4-1.9c.9.2 1.9.4 2.9.4 5.5 0 10-4.1 10-9.3S17.5 2 12 2zm1 12.5l-2.6-2.8-5 2.8L13.2 8l2.7 2.8L21 8l-8 6.5z"/></svg>
+            Zalo EHoldings
+          </a>
+          <a href="https://www.eholdings.vn" target="_blank" rel="noopener noreferrer" data-ehpr-contact="website">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.9 9h-3.2a15 15 0 00-1.3-5 8 8 0 014.5 5zM12 4c.9 1.3 1.7 3.4 2.1 7H9.9c.4-3.6 1.2-5.7 2.1-7zM4.1 13h3.2a15 15 0 001.3 5 8 8 0 01-4.5-5zM8.6 11H4.1a8 8 0 014.5-5 15 15 0 00-1.3 5zm2.3 2h2.2c-.4 3.6-1.2 5.7-2.1 7-.9-1.3-1.7-3.4-2.1-7h2zm4.5 5a15 15 0 001.3-5h3.2a8 8 0 01-4.5 5z"/></svg>
+            www.eholdings.vn
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <div class="ehpr-modal" data-ehpr-modal aria-hidden="true">
+      <div class="ehpr-modal-backdrop" data-ehpr-close-modal tabindex="-1"></div>
+      <div class="ehpr-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="ehpr-modal-title">
+        <button type="button" class="ehpr-modal-close" data-ehpr-close-modal aria-label="Đóng">&times;</button>
+        <h2 id="ehpr-modal-title">Xác nhận xem lộ trình</h2>
+        <p class="ehpr-modal-lead">Để lại thông tin để được ưu tiên tư vấn 1:1 và nhận lộ trình chi tiết.</p>
+        <form data-ehpr-form novalidate>
+          <div class="ehpr-hp" aria-hidden="true">
+            <label>Website <input type="text" name="website_url" tabindex="-1" autocomplete="off" /></label>
+          </div>
+          <div class="ehpr-field">
+            <label for="ehpr-name">Họ và tên *</label>
+            <input id="ehpr-name" name="full_name" type="text" autocomplete="name" required />
+            <div class="ehpr-error" id="ehpr-name-error">Vui lòng nhập họ tên (tối thiểu 2 ký tự).</div>
+          </div>
+          <div class="ehpr-field">
+            <label for="ehpr-phone">Số điện thoại *</label>
+            <input id="ehpr-phone" name="phone" type="tel" autocomplete="tel" required />
+            <div class="ehpr-error" id="ehpr-phone-error">Vui lòng nhập số điện thoại hợp lệ.</div>
+          </div>
+          <div class="ehpr-field">
+            <label for="ehpr-email">Email</label>
+            <input id="ehpr-email" name="email" type="email" autocomplete="email" />
+            <div class="ehpr-error" id="ehpr-email-error">Email không hợp lệ.</div>
+          </div>
+          <div class="ehpr-field">
+            <label for="ehpr-country">Quốc gia quan tâm *</label>
+            <select id="ehpr-country" name="country_id" required data-ehpr-country-select></select>
+            <div class="ehpr-error" id="ehpr-country-error">Vui lòng chọn quốc gia.</div>
+          </div>
+          <label class="ehpr-check">
+            <input type="checkbox" name="consent" value="1" required />
+            <span>Tôi đồng ý với <a href="/chinh-sach-bao-mat/" target="_blank" rel="noopener noreferrer">chính sách bảo mật</a> và việc xử lý dữ liệu cá nhân để được tư vấn.</span>
+          </label>
+          <div class="ehpr-field is-invalid" data-ehpr-consent-wrap style="display:none;">
+            <div class="ehpr-error" style="display:block;">Bạn cần đồng ý chính sách dữ liệu trước khi gửi.</div>
+          </div>
+          <button type="submit" class="ehpr-submit" data-ehpr-submit>Gửi đăng ký tư vấn</button>
+          <div class="ehpr-form-status" data-ehpr-form-status aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var deadline = '2026-08-15T23:59:59+07:00';
+
+      var countryData = [
+        {
+          id: 'kr',
+          name: 'Hàn Quốc',
+          flag: 'https://flagcdn.com/w80/kr.png',
+          program: ['Hệ tiếng D4-1', 'Hệ Cao đẳng D2-1', 'Hệ Đại học D2-2'],
+          roadmap: ['Học tiếng', 'Xuất cảnh', 'Làm thêm hợp pháp', 'Chuyển đổi visa đi làm & định cư'],
+          scholarship: ['Miễn học phí 50-100%', 'Miễn phí KTX'],
+          income: 'Thu nhập làm thêm từ 25-40 triệu/tháng',
+          intake: 'Tháng 12/2026'
+        },
+        {
+          id: 'de',
+          name: 'CHLB Đức',
+          flag: 'https://flagcdn.com/w80/de.png',
+          program: ['Du học nghề vừa học vừa làm'],
+          roadmap: ['Học tiếng', 'Thi chứng chỉ tiếng', 'Xuất cảnh', 'Học 30% lý thuyết, 70% thực hành', 'Đi làm', 'Định cư Châu Âu'],
+          scholarship: ['Miễn 100% học phí trong 3 năm học'],
+          income: 'Nhận lương học nghề từ 1.000 - 2.200 Euro/tháng',
+          intake: 'Tháng 9/2026'
+        },
+        {
+          id: 'jp',
+          name: 'Nhật Bản',
+          flag: 'https://flagcdn.com/w80/jp.png',
+          program: ['Du học tự túc', 'Du học học bổng'],
+          roadmap: ['Học tiếng', 'Xuất cảnh', 'Đi học', 'Đi làm thêm', 'Chuyển đổi visa đi làm & định cư'],
+          scholarship: ['Học bổng tiền mặt hoặc miễn 50-100% học phí'],
+          income: 'Làm thêm thu nhập từ 15-35 triệu VNĐ/tháng',
+          intake: 'Tháng 4/2027'
+        },
+        {
+          id: 'tw',
+          name: 'Đài Loan',
+          flag: 'https://flagcdn.com/w80/tw.png',
+          program: ['Du học hệ 1+4, VHVL', 'Du học hệ tiếng'],
+          roadmap: ['Học tiếng 1-3 tháng', 'Xuất cảnh', 'Đi học & đi làm thêm (4-5 năm)'],
+          scholarship: ['Học bổng miễn phí lên tới 100% học phí từ 1-2 năm học'],
+          income: 'Làm thêm thu nhập từ 20-35 triệu VNĐ/tháng',
+          intake: 'Tháng 2/2027'
+        },
+        {
+          id: 'au',
+          name: 'Úc',
+          flag: 'https://flagcdn.com/w80/au.png',
+          program: ['Du học nghề Úc', 'Du học hệ Đại học'],
+          roadmap: ['Học tiếng', 'Nộp hồ sơ & nhận thư mời', 'Xin visa', 'Xuất cảnh', 'Đi học & đi làm thêm'],
+          scholarship: ['Học bổng miễn học phí tùy theo hồ sơ học viên'],
+          income: 'Làm thêm thu nhập từ 15-25 triệu VNĐ/tháng',
+          intake: 'Tháng 9/2026'
+        },
+        {
+          id: 'es',
+          name: 'Tây Ban Nha',
+          flag: 'https://flagcdn.com/w80/es.png',
+          program: ['Du học nghề', 'Hệ ngôn ngữ', 'Hệ Dự bị Đại học'],
+          roadmap: ['Học tiếng (6 tháng)', 'Xuất cảnh', 'Học nghề', 'Chuyển đổi visa', 'Định cư'],
+          scholarship: ['Hỗ trợ tùy theo hồ sơ học viên'],
+          income: 'Được làm thêm hợp pháp tới 30h/tuần',
+          intake: 'Tháng 9/2026'
+        }
+      ];
+
+      var benefitData = [
+        { title: 'Học bổng học phí', icon: 'cap', tone: 'blue' },
+        { title: 'Học bổng GPA', icon: 'star', tone: 'orange' },
+        { title: 'Học bổng trường đối tác', icon: 'building', tone: 'navy' },
+        { title: 'Voucher phí dịch vụ', icon: 'percent', tone: 'red' },
+        { title: 'Miễn phí Ký túc xá', icon: 'home', tone: 'purple' },
+        { title: 'Tặng vé máy bay', icon: 'plane', tone: 'green' },
+        { title: 'Hỗ trợ việc làm', icon: 'briefcase', tone: 'slate' }
+      ];
+
+      var galleryData = [
+        { title: 'Tiễn bay học viên', imageUrl: 'gallery/tien-bay.jpg' },
+        { title: 'Visa Du học', imageUrl: 'gallery/visa.jpg' },
+        { title: 'Trường đối tác', imageUrl: 'gallery/truong.jpg' },
+        { title: 'Làm thêm hợp pháp', imageUrl: 'gallery/lam-them.jpg' },
+        { title: 'Tốt nghiệp & việc làm', imageUrl: 'gallery/tot-nghiep.jpg' }
+      ];
+
+      var fallbackImg = 'data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27400%27 height=%27300%27%3E%3Crect fill=%27%23DBEAFE%27 width=%27400%27 height=%27300%27/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%27middle%27 fill=%27%230B4A8B%27 font-family=%27sans-serif%27 font-size=%2716%27%3EEholdings%3C/text%3E%3C/svg%3E';
+
+      function trackEvent(eventName, params) {
+        window.dataLayer = window.dataLayer || [];
+        var payload = { event: eventName };
+        if (params && typeof params === 'object') {
+          Object.keys(params).forEach(function (key) {
+            payload[key] = params[key];
+          });
+        }
+        window.dataLayer.push(payload);
+      }
+
+      function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+      function iconSvg(type) {
+        var map = {
+          cap: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.2L1.5 8.4l10.5 5.2 8.7-4.3v5.5h1.8V8.4L12 3.2z"/><path d="M5.2 12.2v4.1c0 .4.2.8.5 1.1C7.2 18.6 9.5 19.2 12 19.2s4.8-.6 6.3-1.8c.3-.3.5-.7.5-1.1v-4.1l-6.8 3.4-6.8-3.4z"/></svg>',
+          star: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.4l2.7 6.3 6.9.6-5.2 4.5 1.6 6.7L12 16.8l-6 3.7 1.6-6.7L2.4 9.3l6.9-.6L12 2.4z"/></svg>',
+          building: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.8L3.5 7v1.8h17V7L12 2.8zM4.8 10.2v9.3h2.4v-3.6h9.6v3.6h2.4v-9.3H4.8zm5.4 1.8h3.6v2.7h-3.6v-2.7zM3.2 20.8h17.6V22H3.2z"/></svg>',
+          percent: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.6 6.2a2.4 2.4 0 100 4.8 2.4 2.4 0 000-4.8zm8.8 6.8a2.4 2.4 0 100 4.8 2.4 2.4 0 000-4.8zM17.9 5.3l1.4 1.4-12.6 12.6-1.4-1.4L17.9 5.3z"/></svg>',
+          home: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L2.8 10.4V21h7.2v-5.4h4V21h7.2V10.4L12 3zm0 3.8a1.7 1.7 0 110 3.4 1.7 1.7 0 010-3.4zm0 4.6c-1.8 0-4.2.8-4.2 2.2V15h8.4v-1.4c0-1.4-2.4-2.2-4.2-2.2z"/></svg>',
+          plane: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>',
+          briefcase: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 2h4a2 2 0 012 2v2h4a2 2 0 012 2v3h-8.25v-.75a.75.75 0 00-.75-.75h-2.5a.75.75 0 00-.75.75V11H2V8a2 2 0 012-2h4V4a2 2 0 012-2zm1.5 2v2h1V4h-1zM2 13h7.25v1a.75.75 0 00.75.75h2.5a.75.75 0 00.75-.75v-1H22v6a2 2 0 01-2 2H4a2 2 0 01-2-2v-6z"/></svg>'
+        };
+        return map[type] || map.cap;
+      }
+
+      function initRoot(root) {
+        var countryList = root.querySelector('[data-ehpr-country-list]');
+        var countrySelect = root.querySelector('[data-ehpr-country-select]');
+        var benefitsEl = root.querySelector('[data-ehpr-benefits]');
+        var galleryEl = root.querySelector('[data-ehpr-gallery]');
+        var modal = root.querySelector('[data-ehpr-modal]');
+        var form = root.querySelector('[data-ehpr-form]');
+        var openBtn = root.querySelector('[data-ehpr-open-modal]');
+        var statusEl = root.querySelector('[data-ehpr-form-status]');
+        var countdownBox = root.querySelector('[data-ehpr-countdown]');
+        var selectedId = countryData[0].id;
+        var lastFocus = null;
+        var formStarted = false;
+        var submitting = false;
+        var countdownTimer = null;
+
+        countryData.forEach(function (item, index) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'ehpr-country-item' + (index === 0 ? ' is-active' : '');
+          btn.setAttribute('role', 'tab');
+          btn.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+          btn.setAttribute('data-country-id', item.id);
+          btn.innerHTML = '<div class="ehpr-country-flag"><img src="' + item.flag + '" alt="" width="48" height="32" loading="lazy" onerror="this.parentNode.textContent=\'' + item.name.charAt(0) + '\'"/></div><span class="ehpr-country-name">' + item.name + '</span>';
+          countryList.appendChild(btn);
+
+          var opt = document.createElement('option');
+          opt.value = item.id;
+          opt.textContent = item.name;
+          countrySelect.appendChild(opt);
+        });
+
+        benefitsEl.innerHTML = benefitData.map(function (item) {
+          return '<article class="ehpr-benefit"><div class="ehpr-benefit-icon is-' + item.tone + '" aria-hidden="true">' + iconSvg(item.icon) + '</div><span>' + item.title + '</span></article>';
+        }).join('');
+
+        galleryEl.innerHTML = galleryData.map(function (item) {
+          return '<article class="ehpr-card ehpr-gallery-item"><img src="' + item.imageUrl + '" alt="' + item.title + '" width="220" height="165" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'' + fallbackImg + '\'"/><span class="ehpr-gallery-caption">' + item.title + '</span></article>';
+        }).join('');
+
+        function resolveUserName() {
+          var params = new URLSearchParams(window.location.search);
+          var candidates = [
+            root.getAttribute('data-ehpr-name'),
+            params.get('full_name'),
+            params.get('name'),
+            params.get('hoten'),
+            params.get('ho_ten')
+          ];
+          for (var i = 0; i < candidates.length; i++) {
+            var value = candidates[i];
+            if (value == null) continue;
+            try { value = decodeURIComponent(String(value)); } catch (err) { /* keep raw */ }
+            value = String(value).replace(/\+/g, ' ').replace(/\s+/g, ' ').trim();
+            if (value.length >= 2 && value.length <= 80) return value;
+          }
+          return '';
+        }
+
+        function renderCongrats() {
+          var titleEl = root.querySelector('[data-ehpr-congrats-text]');
+          if (!titleEl) return;
+          var userName = resolveUserName();
+          titleEl.textContent = userName ? ('Chúc mừng ' + userName) : 'Chúc mừng!';
+        }
+
+        function getCountry(id) {
+          for (var i = 0; i < countryData.length; i++) {
+            if (countryData[i].id === id) return countryData[i];
+          }
+          return countryData[0];
+        }
+
+        function renderResult(id) {
+          var item = getCountry(id);
+          selectedId = item.id;
+          root.querySelector('[data-ehpr-program]').innerHTML = item.program.map(function (x) {
+            return '<li>' + x + '</li>';
+          }).join('');
+          root.querySelector('[data-ehpr-roadmap]').textContent = item.roadmap.join(' → ');
+          root.querySelector('[data-ehpr-scholarship]').innerHTML = item.scholarship.map(function (x) {
+            return '<li>' + x + '</li>';
+          }).join('');
+          root.querySelector('[data-ehpr-income]').textContent = item.income;
+          root.querySelector('[data-ehpr-intake]').textContent = item.intake;
+          countrySelect.value = item.id;
+        }
+
+        function selectCountry(id, track) {
+          var buttons = countryList.querySelectorAll('.ehpr-country-item');
+          buttons.forEach(function (btn) {
+            var active = btn.getAttribute('data-country-id') === id;
+            btn.classList.toggle('is-active', active);
+            btn.setAttribute('aria-selected', active ? 'true' : 'false');
+          });
+          renderResult(id);
+          if (track) {
+            var c = getCountry(id);
+            trackEvent('country_selected', {
+              country_id: c.id,
+              country_name: c.name,
+              intake: c.intake,
+              component: 'country_selector',
+              page_type: 'profile_result'
+            });
+          }
+        }
+
+        countryList.addEventListener('click', function (e) {
+          var btn = e.target.closest('.ehpr-country-item');
+          if (!btn) return;
+          selectCountry(btn.getAttribute('data-country-id'), true);
+        });
+
+        root.querySelector('[data-ehpr-country-prev]').addEventListener('click', function () {
+          countryList.scrollBy({ left: -160, behavior: 'smooth' });
+        });
+        root.querySelector('[data-ehpr-country-next]').addEventListener('click', function () {
+          countryList.scrollBy({ left: 160, behavior: 'smooth' });
+        });
+
+        function tickCountdown() {
+          var now = Date.now();
+          var end = new Date(deadline).getTime();
+          var diff = Math.max(0, end - now);
+          var days = Math.floor(diff / 86400000);
+          var hours = Math.floor((diff % 86400000) / 3600000);
+          var mins = Math.floor((diff % 3600000) / 60000);
+          var secs = Math.floor((diff % 60000) / 1000);
+          countdownBox.querySelector('[data-ehpr-days]').textContent = pad(days);
+          countdownBox.querySelector('[data-ehpr-hours]').textContent = pad(hours);
+          countdownBox.querySelector('[data-ehpr-mins]').textContent = pad(mins);
+          countdownBox.querySelector('[data-ehpr-secs]').textContent = pad(secs);
+          if (diff <= 0) {
+            countdownBox.classList.add('is-expired');
+            if (countdownTimer) {
+              clearInterval(countdownTimer);
+              countdownTimer = null;
+            }
+          }
+        }
+        tickCountdown();
+        countdownTimer = setInterval(tickCountdown, 1000);
+
+        function openModal() {
+          lastFocus = document.activeElement;
+          modal.classList.add('is-open');
+          modal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+          trackEvent('consultation_modal_opened', { component: 'cta', page_type: 'profile_result' });
+          trackEvent('recommendation_cta_clicked', { component: 'footer_cta', page_type: 'profile_result' });
+          var first = form.querySelector('#ehpr-name');
+          if (first) first.focus();
+        }
+
+        function closeModal() {
+          modal.classList.remove('is-open');
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+          if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+        }
+
+        // Đảm bảo form không hiện khi vừa mở trang
+        closeModal();
+
+        openBtn.addEventListener('click', openModal);
+        root.querySelectorAll('[data-ehpr-close-modal]').forEach(function (el) {
+          el.addEventListener('click', closeModal);
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+        });
+
+        root.querySelectorAll('[data-ehpr-contact]').forEach(function (el) {
+          el.addEventListener('click', function () {
+            trackEvent('contact_channel_clicked', {
+              contact_channel: el.getAttribute('data-ehpr-contact'),
+              component: 'footer_contacts',
+              page_type: 'profile_result'
+            });
+          });
+        });
+
+        form.addEventListener('focusin', function () {
+          if (!formStarted) {
+            formStarted = true;
+            trackEvent('consultation_form_started', { component: 'consultation_modal', page_type: 'profile_result' });
+          }
+        });
+
+        function setInvalid(field, invalid) {
+          field.classList.toggle('is-invalid', !!invalid);
+          var input = field.querySelector('input, select');
+          if (input) input.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+        }
+
+        function validatePhone(value) {
+          var cleaned = String(value || '').replace(/[\s.\-()]/g, '');
+          return /^(0|\+84|84)[0-9]{8,10}$/.test(cleaned);
+        }
+
+        function validateEmail(value) {
+          if (!value) return true;
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        }
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (submitting) return;
+
+          var nameField = form.querySelector('#ehpr-name').closest('.ehpr-field');
+          var phoneField = form.querySelector('#ehpr-phone').closest('.ehpr-field');
+          var emailField = form.querySelector('#ehpr-email').closest('.ehpr-field');
+          var countryField = form.querySelector('#ehpr-country').closest('.ehpr-field');
+          var consentWrap = form.querySelector('[data-ehpr-consent-wrap]');
+          var fullName = form.querySelector('#ehpr-name').value.trim();
+          var phone = form.querySelector('#ehpr-phone').value.trim();
+          var email = form.querySelector('#ehpr-email').value.trim();
+          var countryId = form.querySelector('#ehpr-country').value;
+          var consent = form.querySelector('input[name="consent"]').checked;
+          var hp = form.querySelector('input[name="website_url"]').value;
+
+          var ok = true;
+          setInvalid(nameField, fullName.length < 2); if (fullName.length < 2) ok = false;
+          setInvalid(phoneField, !validatePhone(phone)); if (!validatePhone(phone)) ok = false;
+          setInvalid(emailField, !validateEmail(email)); if (!validateEmail(email)) ok = false;
+          setInvalid(countryField, !countryId); if (!countryId) ok = false;
+          consentWrap.style.display = consent ? 'none' : 'block';
+          if (!consent) ok = false;
+          if (hp) ok = false;
+          if (!ok) return;
+
+          submitting = true;
+          var submitBtn = form.querySelector('[data-ehpr-submit]');
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Đang gửi...';
+          statusEl.className = 'ehpr-form-status';
+          statusEl.textContent = '';
+
+          window.setTimeout(function () {
+            submitting = false;
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Gửi đăng ký tư vấn';
+            statusEl.className = 'ehpr-form-status is-success';
+            statusEl.textContent = 'Đăng ký thành công! Tư vấn viên sẽ liên hệ với bạn sớm.';
+            trackEvent('consultation_form_submitted', {
+              country_id: countryId,
+              component: 'consultation_modal',
+              page_type: 'profile_result'
+            });
+            form.reset();
+            countrySelect.value = selectedId;
+          }, 700);
+        });
+
+        selectCountry(selectedId, false);
+        renderCongrats();
+        trackEvent('result_page_viewed', { page_type: 'profile_result', component: 'landing' });
+      }
+
+      document.querySelectorAll('[data-ehpr-root]').forEach(initRoot);
+    })();
+  </script>
+</body>
+</html>
