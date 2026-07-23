@@ -723,7 +723,6 @@
       margin: 8px 0 14px;
     }
     .ehpr-check input { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; }
-    .ehpr-check a { color: var(--ehpr-blue); text-decoration: underline; }
     .ehpr-submit {
       width: 100%;
       min-height: 48px;
@@ -1097,23 +1096,20 @@
             <div class="ehpr-error" id="ehpr-phone-error">Vui lòng nhập số điện thoại hợp lệ.</div>
           </div>
           <div class="ehpr-field">
-            <label for="ehpr-email">Email</label>
-            <input id="ehpr-email" name="email" type="email" autocomplete="email" />
-            <div class="ehpr-error" id="ehpr-email-error">Email không hợp lệ.</div>
-          </div>
-          <div class="ehpr-field">
             <label for="ehpr-country">Quốc gia quan tâm *</label>
-            <select id="ehpr-country" name="country_id" required data-ehpr-country-select></select>
+            <select id="ehpr-country" name="country_id" required data-ehpr-country-select>
+              <option value="">Chọn quốc gia</option>
+            </select>
             <div class="ehpr-error" id="ehpr-country-error">Vui lòng chọn quốc gia.</div>
           </div>
           <label class="ehpr-check">
-            <input type="checkbox" name="consent" value="1" required />
-            <span>Tôi đồng ý với <a href="/chinh-sach-bao-mat/" target="_blank" rel="noopener noreferrer">chính sách bảo mật</a> và việc xử lý dữ liệu cá nhân để được tư vấn.</span>
+            <input type="checkbox" name="consent" value="1" required data-ehpr-consent />
+            <span>Tôi đồng ý với chính sách bảo mật và việc xử lý dữ liệu cá nhân để được tư vấn.</span>
           </label>
           <div class="ehpr-field is-invalid" data-ehpr-consent-wrap style="display:none;">
-            <div class="ehpr-error" style="display:block;">Bạn cần đồng ý chính sách dữ liệu trước khi gửi.</div>
+            <div class="ehpr-error" style="display:block;">Bạn cần đồng ý chính sách bảo mật và xử lý dữ liệu trước khi gửi.</div>
           </div>
-          <button type="submit" class="ehpr-submit" data-ehpr-submit>Gửi đăng ký tư vấn</button>
+          <button type="submit" class="ehpr-submit" data-ehpr-submit disabled>Gửi đăng ký tư vấn</button>
           <div class="ehpr-form-status" data-ehpr-form-status aria-live="polite"></div>
         </form>
       </div>
@@ -1269,6 +1265,10 @@
           opt.textContent = item.name;
           countrySelect.appendChild(opt);
         });
+        var otherOpt = document.createElement('option');
+        otherOpt.value = 'other';
+        otherOpt.textContent = 'Khác';
+        countrySelect.appendChild(otherOpt);
 
         benefitsEl.innerHTML = benefitData.map(function (item) {
           return '<article class="ehpr-benefit"><div class="ehpr-benefit-icon is-' + item.tone + '" aria-hidden="true">' + iconSvg(item.icon) + '</div><span>' + item.title + '</span></article>';
@@ -1477,10 +1477,17 @@
           return /^(0|\+84|84)[0-9]{8,10}$/.test(cleaned);
         }
 
-        function validateEmail(value) {
-          if (!value) return true;
-          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        var submitBtn = form.querySelector('[data-ehpr-submit]');
+        var consentInput = form.querySelector('[data-ehpr-consent]');
+        var consentWrap = form.querySelector('[data-ehpr-consent-wrap]');
+
+        function syncConsentSubmit() {
+          var agreed = !!(consentInput && consentInput.checked);
+          submitBtn.disabled = !agreed || submitting;
+          if (agreed) consentWrap.style.display = 'none';
         }
+        consentInput.addEventListener('change', syncConsentSubmit);
+        syncConsentSubmit();
 
         form.addEventListener('submit', function (e) {
           e.preventDefault();
@@ -1488,28 +1495,26 @@
 
           var nameField = form.querySelector('#ehpr-name').closest('.ehpr-field');
           var phoneField = form.querySelector('#ehpr-phone').closest('.ehpr-field');
-          var emailField = form.querySelector('#ehpr-email').closest('.ehpr-field');
           var countryField = form.querySelector('#ehpr-country').closest('.ehpr-field');
-          var consentWrap = form.querySelector('[data-ehpr-consent-wrap]');
           var fullName = form.querySelector('#ehpr-name').value.trim();
           var phone = form.querySelector('#ehpr-phone').value.trim();
-          var email = form.querySelector('#ehpr-email').value.trim();
           var countryId = form.querySelector('#ehpr-country').value;
-          var consent = form.querySelector('input[name="consent"]').checked;
+          var consent = consentInput.checked;
           var hp = form.querySelector('input[name="website_url"]').value;
 
           var ok = true;
           setInvalid(nameField, fullName.length < 2); if (fullName.length < 2) ok = false;
           setInvalid(phoneField, !validatePhone(phone)); if (!validatePhone(phone)) ok = false;
-          setInvalid(emailField, !validateEmail(email)); if (!validateEmail(email)) ok = false;
           setInvalid(countryField, !countryId); if (!countryId) ok = false;
           consentWrap.style.display = consent ? 'none' : 'block';
-          if (!consent) ok = false;
+          if (!consent) {
+            ok = false;
+            syncConsentSubmit();
+          }
           if (hp) ok = false;
           if (!ok) return;
 
           submitting = true;
-          var submitBtn = form.querySelector('[data-ehpr-submit]');
           submitBtn.disabled = true;
           submitBtn.textContent = 'Đang gửi...';
           statusEl.className = 'ehpr-form-status';
@@ -1517,7 +1522,6 @@
 
           window.setTimeout(function () {
             submitting = false;
-            submitBtn.disabled = false;
             submitBtn.textContent = 'Gửi đăng ký tư vấn';
             statusEl.className = 'ehpr-form-status is-success';
             statusEl.textContent = 'Đăng ký thành công! Tư vấn viên sẽ liên hệ với bạn sớm.';
@@ -1528,6 +1532,7 @@
             });
             form.reset();
             countrySelect.value = selectedId;
+            syncConsentSubmit();
           }, 700);
         });
 
